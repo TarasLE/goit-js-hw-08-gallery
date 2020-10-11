@@ -106,7 +106,7 @@ function onPictureClick(event) {
 
   buttonCloseWindow.addEventListener('click', buttonClose);
   modWindow.addEventListener('click', closeOnOverlay);
-  modWindow.addEventListener('keydown', closeOnEsc);
+  window.addEventListener('keydown', closeOnEsc);
 
  }
 
@@ -114,6 +114,10 @@ function onPictureClick(event) {
 function buttonClose() {
   modWindow.classList.remove('is-open');
   originPicture.src = '';
+  buttonCloseWindow.removeEventListener('click', buttonClose);
+  modWindow.removeEventListener('click', closeOnOverlay);
+  window.removeEventListener('keydown', closeOnEsc);
+
   }
 
 function closeOnOverlay(event) {
@@ -127,5 +131,4 @@ function closeOnEsc(event) {
   if (event.keyCode == 27) {
     buttonClose();
   }  
-  // console.log(event);
  }
