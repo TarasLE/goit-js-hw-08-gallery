@@ -91,7 +91,10 @@ function renderGallery(data) {
   
 galleryContainer.insertAdjacentHTML("beforeend", renderGallery(imageData));
 
-galleryContainer.addEventListener('click', onPictureClick)
+galleryContainer.addEventListener('click', onPictureClick);
+buttonCloseWindow.addEventListener('click', buttonClose);
+modWindow.addEventListener('click', closeOnOverlay);
+window.addEventListener('keydown', closeOnEsc);
 
 
 function onPictureClick(event) {
@@ -103,22 +106,13 @@ function onPictureClick(event) {
   event.preventDefault();
   modWindow.classList.add('is-open')
   originPicture.src = event.target.dataset.source;
-
-  buttonCloseWindow.addEventListener('click', buttonClose);
-  modWindow.addEventListener('click', closeOnOverlay);
-  window.addEventListener('keydown', closeOnEsc);
-
- }
+  }
 
 
 function buttonClose() {
   modWindow.classList.remove('is-open');
   originPicture.src = '';
-  buttonCloseWindow.removeEventListener('click', buttonClose);
-  modWindow.removeEventListener('click', closeOnOverlay);
-  window.removeEventListener('keydown', closeOnEsc);
-
-  }
+    }
 
 function closeOnOverlay(event) {
   if (event.target.nodeName == "IMG") {
